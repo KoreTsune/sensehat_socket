@@ -2,6 +2,7 @@ from sense_hat import SenseHat
 import datetime
 import time
 import json
+import os
 from pytz import timezone
 import requests
 
@@ -17,14 +18,14 @@ def json_sensor_value(sense, url):
 
     # requests post
     headers = {'Content-Type': 'application/json', }
-    req = requests.put(url, data=json.dumps(send_mes).encode(), headers=headers)
+    req = requests.post(url, data=json.dumps(send_mes).encode(), headers=headers)
 
     return now_time, humidity, temp, pressure
 
 
 def main():
     sense = SenseHat()
-    url = "http://61.113.176.134:9200/"
+    url = os.getenv('URL')
     sense.clear()
     time.sleep(5)
 

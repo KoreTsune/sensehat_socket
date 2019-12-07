@@ -1,6 +1,7 @@
 import datetime
 import time
 import json
+import os
 from pytz import timezone
 import serial
 import re
@@ -19,13 +20,13 @@ def json_sensor_value(con, url):
 
     # requests post
     headers = {'Content-Type': 'application/json', }
-    req = requests.put(url, data=json.dumps(send_mes).encode(), headers=headers)
+    req = requests.post(url, data=json.dumps(send_mes).encode(), headers=headers)
 
     return now_time, moisture_data[0]
 
 
 def main():
-    url = "http://61.113.176.134:9200/"
+    url = os.getenv('URL')
     con = serial.Serial('/dev/ttyACM0', 9600)
     time.sleep(5)
 
