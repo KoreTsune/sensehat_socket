@@ -11,7 +11,7 @@ def json_sensor_value(sense, url):
     humidity = sense.get_humidity()
     temp = sense.get_temperature_from_humidity()
     pressure = sense.get_pressure()
-    now_time = datetime.datetime.now(timezone("Asia/Tokyo")).strftime("%Y%m%d %H:%M:%S")
+    now_time = datetime.datetime.now(timezone("Asia/Tokyo")).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
     # 送るdict(json)データです．
     send_mes = {'datetime': now_time, 'humidity': humidity, 'temp': temp, 'press': pressure}

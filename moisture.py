@@ -13,7 +13,7 @@ def json_sensor_value(con, url):
     # moisture_dataでうまく値が取れなかった時の処理です．
     if len(moisture_data) == 0:
         moisture_data = ["0"]
-    now_time = datetime.datetime.now(timezone("Asia/Tokyo")).strftime("%Y%m%d %H:%M:%S")
+    now_time = datetime.datetime.now(timezone("Asia/Tokyo")).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
     # 送るdict(json)データです．
     send_mes = {'datetime': now_time, 'moisture': moisture_data[0]}
