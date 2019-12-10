@@ -1,27 +1,15 @@
 FROM protik77/python3-sensehat
 
-RUN apt-get update && apt-get upgrade -y
-
-RUN apt-get install -y \
-    vim \
-    python3-dev \
-    python3-pip \
-    git
-
-RUN pip3 install pytz pyserial requests
-RUN git clone https://github.com/KoreTsune/sensehat_socket.git
-
-CMD ["python3", "sensehat_socket/moisture.py"]FROM protik77/python3-sensehat
-
-RUN apt-get update && apt-get upgrade -y
-
-RUN apt-get install -y \
-    vim \
-    python3-dev \
-    python3-pip \
-    git
-
-RUN pip3 install pytz pyserial requests
-RUN git clone https://github.com/KoreTsune/sensehat_socket.git
-
+RUN apt-get update && \
+    apt-get install -y \
+        python3-dev \
+        python3-pip \
+        git \
+    pip3 install pytz pyserial requests && \
+    git clone https://github.com/KoreTsune/sensehat_socket.git && \
+    apt remove --purge -y \
+        git \
+        python3-pip && \
+    apt autoremove -y
+ENV URL="http://10.10.0.4:9200/test1_index/temp_sensor"
 CMD ["python3", "sensehat_socket/sensehat.py"]
